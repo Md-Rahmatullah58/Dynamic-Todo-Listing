@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fancy Todo List</title>
+ <style>
+  
+  body {
+      font-family: 'Arial', sans-serif;
+      background-color: #b9fc98;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #todo-container {
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      width: 350px;
+    
+    }
+
+    #todo-header {
+      background-color: #2fc90c;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      /* letter-spacing:1px; */
+
+    }
+
+    #todo-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .todo-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #ecf0f1;
+    }
+
+    .todo-item:last-child {
+      border-bottom: none;
+    }
+
+    .todo-text {
+      flex-grow: 1;
+      margin-right: 10px;
+    }
+
+    .todo-actions {
+      display: flex;
+    }
+
+    .delete-btn {
+      background-color: #dc2915;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-left: 5px;
+      /* font-weight:bold ; */
+      font-style: italic;
+
+    }
+
+    #add-todo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-top: 1px solid #ecf0f1;
+    }
+
+    #todo-input {
+      flex-grow: 1;
+      padding: 5px;
+      border: 1px solid #bdc3c7;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+
+    #add-btn {
+      background-color: #0dbe57;
+      color: #faf9f9;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+ </style>
+</head>
+<body>
+  <div id="todo-container">
+    <div id="todo-header">
+      <h2>Dynamic Todo Listing</h2>
+    </div>
+    <ul id="todo-list"></ul>
+    <div id="add-todo">
+      <input type="text" id="todo-input" placeholder="Add here new todo">
+      <button id="add-btn">Add</button>
+    </div>
+  </div>
+
+ <script>
+
+document.addEventListener('DOMContentLoaded', function () {
+  const todoList = document.getElementById('todo-list');
+  const addBtn = document.getElementById('add-btn');
+  const todoInput = document.getElementById('todo-input');
+
+  addBtn.addEventListener('click', function () {
+    const todoText = todoInput.value.trim();
+
+    if (todoText !== '') {
+      const todoItem = document.createElement('li');
+      todoItem.className = 'todo-item';
+
+      const textContainer = document.createElement('div');
+      textContainer.className = 'todo-text';
+      textContainer.textContent = todoText;
+
+      const actionsContainer = document.createElement('div');
+      actionsContainer.className = 'todo-actions';
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'delete-btn';
+      deleteBtn.textContent = 'Delete';
+
+      deleteBtn.addEventListener('click', function () {
+        todoItem.remove();
+      });
+
+
+      actionsContainer.appendChild(deleteBtn);
+      todoItem.appendChild(textContainer);
+      todoItem.appendChild(actionsContainer);
+      todoList.appendChild(todoItem);
+
+      todoInput.value = '';
+    }
+  });
+});
+
+
+ </script>
+</body>
+</html>
